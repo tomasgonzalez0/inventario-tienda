@@ -1,0 +1,8 @@
+node_modules/
+coverage/
+.env
+*.log
+.azure/
+release.zip
+.DS_Store
+

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Panel web del inventario de una tienda." />
+    <title>Inventario Tienda</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav" aria-label="Navegación principal">
+        <a class="brand" href="/">Inventario Tienda</a>
+        <div class="nav-links">
+          <a href="/docs">API / Swagger</a>
+          <a href="/health">Estado</a>
+        </div>
+      </nav>
+      <div class="hero-content">
+        <p class="eyebrow">Despliegue de Software · Práctica 3</p>
+        <h1>Control del inventario,<br />simple y verificable.</h1>
+        <p class="lead">
+          Aplicación web Node.js publicada en IIS y Azure App Service con una
+          API REST documentada.
+        </p>
+        <div class="status" id="service-status" role="status">
+          <span class="status-dot" aria-hidden="true"></span>
+          Comprobando servicio…
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="summary" aria-label="Resumen del inventario">
+        <article>
+          <span>Productos registrados</span>
+          <strong id="product-count">—</strong>
+        </article>
+        <article>
+          <span>Unidades disponibles</span>
+          <strong id="stock-count">—</strong>
+        </article>
+        <article>
+          <span>Valor del inventario</span>
+          <strong id="inventory-value">—</strong>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow dark">Catálogo actual</p>
+            <h2>Productos</h2>
+          </div>
+          <button class="button" id="refresh-button" type="button">Actualizar</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Existencias</th>
+              </tr>
+            </thead>
+            <tbody id="product-table">
+              <tr><td colspan="4">Cargando productos…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="message" id="message" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Instituto Tecnológico Metropolitano · Despliegue de Software · 2026</p>
+    </footer>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
+

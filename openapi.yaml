@@ -1,0 +1,125 @@
+openapi: 3.0.3
+info:
+  title: API de Inventario Tienda
+  version: 1.0.0
+  description: API REST publicada en IIS y Azure App Service para la Práctica 3.
+servers:
+  - url: /
+paths:
+  /health:
+    get:
+      summary: Comprueba el estado del servicio
+      responses:
+        "200":
+          description: Servicio saludable
+  /api/info:
+    get:
+      summary: Devuelve información pública del servicio
+      responses:
+        "200":
+          description: Información de la aplicación
+  /api/products:
+    get:
+      summary: Lista todos los productos
+      responses:
+        "200":
+          description: Lista de productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+    post:
+      summary: Crea un producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductInput"
+      responses:
+        "201":
+          description: Producto creado
+        "400":
+          description: Datos inválidos
+        "409":
+          description: SKU duplicado
+  /api/products/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Consulta un producto
+      responses:
+        "200":
+          description: Producto encontrado
+        "404":
+          description: Producto no encontrado
+    put:
+      summary: Reemplaza un producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductInput"
+      responses:
+        "200":
+          description: Producto actualizado
+        "400":
+          description: Datos inválidos
+        "404":
+          description: Producto no encontrado
+        "409":
+          description: SKU duplicado
+    delete:
+      summary: Elimina un producto
+      responses:
+        "204":
+          description: Producto eliminado
+        "404":
+          description: Producto no encontrado
+components:
+  schemas:
+    ProductInput:
+      type: object
+      additionalProperties: false
+      required: [sku, name, price, stock]
+      properties:
+        sku:
+          type: string
+          minLength: 3
+          maxLength: 30
+          example: TEC-100
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          example: Teclado mecánico
+        description:
+          type: string
+          maxLength: 500
+          default: ""
+        price:
+          type: number
+          minimum: 0
+          example: 280000
+        stock:
+          type: integer
+          minimum: 0
+          example: 10
+    Product:
+      allOf:
+        - type: object
+          required: [id]
+          properties:
+            id:
+              type: string
+              format: uuid
+        - $ref: "#/components/schemas/ProductInput"
+
