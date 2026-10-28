@@ -11,7 +11,9 @@ IIS (puerto 8081) reenvía todo a Node en `127.0.0.1:3001` mediante URL Rewrite 
 ```
 
 `setup-iis.ps1` crea `InventarioTiendaPool` (No Managed Code, Integrated) y el sitio
-`InventarioTienda` (ruta física `iis\proxy`, binding HTTP `*:8081`). Es idempotente.
+`InventarioTienda` (ruta física `iis\proxy`, binding HTTP `*:8081`). Es idempotente:
+si el sitio ya existe, actualiza su ruta, Application Pool y binding al puerto indicado.
+Los instaladores de URL Rewrite y ARR se aceptan únicamente si su firma digital es válida.
 
 Verificación manual: http://localhost:8081/ , http://localhost:8081/docs , http://localhost:8081/health
 
