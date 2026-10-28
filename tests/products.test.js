@@ -25,11 +25,57 @@ describe("Inventario Tienda", () => {
     expect(response.text).toContain("Inventario Tienda");
   });
 
+  it("enlaza la documentación y el estado desde la página principal", async () => {
+    const response = await request(app).get("/");
+    expect(response.text).toContain('href="/docs"');
+    expect(response.text).toContain('href="/health"');
+  });
+
+  it("sirve los recursos estáticos de la página principal", async () => {
+    const styles = await request(app).get("/styles.css");
+    expect(styles.status).toBe(200);
+    expect(styles.type).toContain("css");
+
+    const script = await request(app).get("/app.js");
+    expect(script.status).toBe(200);
+    expect(script.type).toContain("javascript");
+  });
+
   it("responde al health check", async () => {
     const response = await request(app).get("/health");
     expect(response.status).toBe(200);
+    expect(response.type).toContain("json");
     expect(response.body.status).toBe("ok");
     expect(response.body.service).toBe("inventario-tienda");
+  });
+
+  it("informa el entorno de ejecución en el health check", async () => {
+    const previous = process.env.NODE_ENV;
+    try {
+      process.env.NODE_ENV = "production";
+      expect((await request(app).get("/health")).body.environment).toBe("production");
+
+      delete process.env.NODE_ENV;
+      expect((await request(app).get("/health")).body.environment).toBe("development");
+    } finally {
+      if (previous === undefined) delete process.env.NODE_ENV;
+      else process.env.NODE_ENV = previous;
+    }
+  });
+
+  it("publica la documentación OpenAPI", async () => {
+    const docs = await request(app).get("/docs/");
+    expect(docs.status).toBe(200);
+    expect(docs.type).toContain("html");
+
+    const spec = await request(app).get("/openapi.yaml");
+    expect(spec.status).toBe(200);
+    expect(spec.text).toContain("openapi:");
+  });
+
+  it("no expone la tecnología del servidor", async () => {
+    const response = await request(app).get("/health");
+    expect(response.headers["x-powered-by"]).toBeUndefined();
   });
 
   it("expone información pública del servicio", async () => {
