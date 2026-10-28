@@ -47,14 +47,38 @@ az login
 
 El script detecta el runtime compatible, crea o reutiliza los recursos, configura las variables, habilita HTTPS Only, genera el paquete ZIP y publica la aplicación.
 
-## Evidencias que debe agregar Carla
+## Evidencias de Carla Giraldo
 
-Estas capturas constituyen su contribución individual y deben guardarse en `evidencias/azure/`:
+Las capturas se guardan en `evidencias/azure/` y documentan la configuración y validación de la publicación:
 
-1. `01-app-service-overview.png`: Overview mostrando nombre, estado y URL.
-2. `02-application-settings.png`: nombres de las Application Settings, sin secretos.
-3. `03-https-only.png`: opción HTTPS Only habilitada.
-4. `04-aplicacion-publica.png`: panel funcionando en la URL HTTPS.
-5. `05-health-publico.png`: respuesta de `/health`.
+### Resumen del App Service
 
-Después debe actualizar la tabla de responsabilidades del README con los nombres exactos de sus archivos, crear un commit desde su cuenta y abrir un Pull Request. Esto evita que la actividad de Azure quede atribuida únicamente al commit inicial de Tomás.
+La vista general permite comprobar el nombre de la aplicación, su estado y la URL pública.
+
+![Vista general del App Service](../evidencias/azure/01-app-service-overview.png)
+
+### Application Settings
+
+La configuración contiene las variables requeridas por la aplicación. La evidencia muestra únicamente los nombres y evita exponer secretos.
+
+![Application Settings del App Service](../evidencias/azure/02-application-settings.png)
+
+### HTTPS Only
+
+El App Service obliga el uso de HTTPS para proteger el tráfico entre el cliente y la aplicación.
+
+![HTTPS Only habilitado](../evidencias/azure/03-https-only.png)
+
+### Aplicación pública
+
+El panel de inventario responde correctamente desde la URL pública y reporta el entorno `production`.
+
+![Aplicación publicada en Azure](../evidencias/azure/04-aplicacion-publica.png)
+
+### Health check público
+
+El endpoint `/health` devuelve el estado `ok`, el nombre del servicio y el entorno `production`.
+
+![Health check público](../evidencias/azure/05-health-publico.png)
+
+Estas evidencias y esta documentación conforman la contribución individual de Carla. Su publicación se realizará posteriormente desde su cuenta de GitHub mediante una rama y un Pull Request, después de revisar el borrador.
