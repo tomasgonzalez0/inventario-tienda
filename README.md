@@ -264,31 +264,37 @@ Resultados consolidados: [evidencias/pruebas/calidad.md](evidencias/pruebas/cali
 
 ## Evidencias
 
-### Pruebas automatizadas
+### Pruebas y calidad
 
 ![Pruebas automatizadas aprobadas](evidencias/pruebas/01-pruebas-automatizadas.png)
-
-### Auditoría de dependencias
 
 ![Auditoría sin vulnerabilidades](evidencias/pruebas/02-auditoria-dependencias.png)
 
 ### Aplicación publicada mediante IIS
 
-![Aplicación funcionando por IIS](evidencias/pruebas/03-validacion-iis-web.png)
+![Aplicación funcionando a través del sitio IIS](evidencias/ISS/03-validacion-iis-web.png)
 
-![Health check mediante IIS](evidencias/pruebas/03-validacion-iis-health.png)
+![Health check de la aplicación a través de IIS](evidencias/ISS/03-validacion-iis-health.png)
 
 ### Aplicación publicada en Azure
 
-![Validación de Azure App Service](evidencias/pruebas/04-validacion-azure.png)
+![Validación de la publicación en Azure App Service](evidencias/ISS/04-validacion-azure.png)
+
+![Resumen y estado del Azure App Service](evidencias/azure/01-app-service-overview.png)
+
+![Configuración de Application Settings del App Service](evidencias/azure/02-application-settings.png)
+
+![Configuración HTTPS Only habilitada](evidencias/azure/03-https-only.png)
+
+![Aplicación de inventario publicada y accesible en Azure](evidencias/azure/04-aplicacion-publica.png)
+
+![Endpoint de health público de Azure](evidencias/azure/05-health-publico.png)
 
 Reportes disponibles:
 
 - [Calidad y resumen multientorno](evidencias/pruebas/calidad.md)
 - [Smoke test local](evidencias/pruebas/local.md)
 - [Smoke test de Azure](evidencias/pruebas/azure.md)
-
-Las evidencias adicionales del Application Pool, sitio, binding, Application Settings y HTTPS Only deben conservarse en el PDF final y, cuando se agreguen al repositorio, organizarse en `evidencias/iis/` y `evidencias/azure/`.
 
 ## Estructura principal
 
